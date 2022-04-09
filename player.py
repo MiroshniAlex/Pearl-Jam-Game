@@ -5,19 +5,19 @@ from pygame.locals import *
 
 class Player:
     """Player movement, updating, rendering, speed, acceleration."""
-    
+    y_pos: float #arbitary values assigned to the position of the player
+    x_pos: float
+    rect: pygame.Rect
 
-    def __init__(self, x_pos: float, y_pos: float, rect: pygame.Rect):
+
+
+
+    def __init__(self, x_pos: float = 30, y_pos: float = 400 rect: pygame.Rect):
         """Constructor definition for Player class!"""
+        self.rect = rect
+        self.y_pos = y_pos
+        self.x_pos = x_pos
 
-    # Takes the y_pos and changes the player object's speed thus changing pos
-    def jump(self, y_pos: float):
-        
-    
 
-    # Takes x_pos and checks input in game.py file
-    def move(self, x_pos: float):
-  
-    
-    # define rendering function
-    def
+
+
