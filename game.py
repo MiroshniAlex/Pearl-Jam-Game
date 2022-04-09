@@ -34,9 +34,29 @@ platform2: pygame.Rect = pygame.Rect(300, 400, 150, 10)
 platform3: pygame.Rect = pygame.Rect(100, 200, 150, 10)
 platform4: pygame.Rect = pygame.Rect(400, 10, 150, 10)
 platform5: pygame.Rect = pygame.Rect(700, -250, 150, 10)
+platform6: pygame.Rect = pygame.Rect(200, -350, 150, 10)
+platform7: pygame.Rect = pygame.Rect(-100, -460, 150, 10)
+platform8: pygame.Rect = pygame.Rect(150, -600, 150, 10)
+platform9: pygame.Rect = pygame.Rect(300, -700, 150, 10)
+platform10: pygame.Rect = pygame.Rect(150, -600, 150, 10)
 
-platforms: list[pygame.Rect] = [platform1, platform2, platform3, platform4, platform5]
-pearls: list[pygame.Rect] = [pygame.Rect(125, 190, 10, 10)]
+platforms: list[pygame.Rect] = [platform1, 
+                                platform2, 
+                                platform3, 
+                                platform4, 
+                                platform5, 
+                                platform6, 
+                                platform7, 
+                                platform8,
+                                platform9,
+                                platform10]
+
+pearl1: pygame.Rect = pygame.Rect(125, 180, 10, 10)
+pearl2: pygame.Rect = pygame.Rect(475, -10, 10, 10)
+pearl3: pygame.Rect = pygame.Rect(275, -370, 10, 10)
+pearl4: pygame.Rect = pygame.Rect(225, -620, 10, 10)
+
+pearls: list[pygame.Rect] = [pearl1, pearl2, pearl3, pearl4]
 
 # TODO Instantiate Rooms
 room1: Map = Map(600, 600, 0, platforms)
@@ -46,7 +66,7 @@ PLAYER_SPEED: float = 1
 GRAVITY_ACCEL: float = -.004
 PLAYER_HEIGHT: float = 20.0
 PLAYER_WIDTH: float = 20.0
-player: Player = Player(PLAYER_HEIGHT, PLAYER_WIDTH, 100, 500)
+player: Player = Player(PLAYER_HEIGHT, PLAYER_WIDTH, 290, 500)
 
 # Defining platform collision check function
 def player_platform_collision(room: Map, player: Player) -> bool:
@@ -121,7 +141,10 @@ while running:
             room1.y_vel = 0
         elif collision and player.rect.y > platform.y:
             room1.move_down(pearls, -5)
-
+    
+    for pearl in pearls:
+        if player.rect.colliderect(pearl):
+            pearls.remove(pearl)
     
     # Updating all models
     room1.render(screen, pearls)
