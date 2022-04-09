@@ -19,8 +19,8 @@ clock = pygame.time.Clock()
 # TODO Instantiate Player
 
 # Define screen height and width
-SCREEN_WIDTH: int = 500
-SCREEN_HEIGHT: int = 500
+SCREEN_WIDTH: int = 600
+SCREEN_HEIGHT: int = 600
 
 # Set up the drawing window and size
 screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT])
@@ -30,6 +30,7 @@ running = True
 
 # Game loop
 while running:
+    screen.fill((0, 0, 0))
     for event in pygame.event.get():
         # Check for QUIT event (user closes window). If QUIT, then set running to false.
         if event.type == QUIT:
