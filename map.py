@@ -11,15 +11,16 @@ class Map:
     entrances: list[pygame.Rect]
     
     # TODO init (screen_width, screen_height, platform_list, walls, enterances)
-    def __init__(self, width: float, height: float, platforms_list: list[pygame.Rect] = [], entrances: list[pygame.Rect] = []):
+    def __init__(self, width: float, height: float, y_vel: float = 0, platforms_list: list[pygame.Rect] = [], entrances: list[pygame.Rect] = []):
         self.width = width
         self.height = height
+        self.y_vel = y_vel
         self.platforms = platforms_list
         self.enterances = entrances
 
     # TODO define render
     # Renders each object 
-    def render(self, screen, pearls: list[pygame.Rect]):
+    def render(self, screen, pearls: list[pygame.Rect] = []):
         """Renders pearls and platforms."""
         PLAT_COLOR: tuple(int) = (105, 88, 51)
         PEARL_COLOR: tuple(int) = (242, 235, 218)
@@ -33,27 +34,30 @@ class Map:
     def move_left(self, pearls: list[pygame.Rect], x_speed: float):
         """Moves the map to the right to illusion left movement."""
         for platform in self.platforms:
-            platform.x += x_speed
+            platform.move_ip(x_speed, 0)
         for pearl in pearls:
-            pearl.x += x_speed
+            pearl.move_ip(x_speed, 0)
     
     def move_right(self, pearls: list[pygame.Rect], x_speed: float):
         """ Moves the map to the left to illusion right movement."""
         for platform in self.platforms:
-            platform.x -= x_speed
+            platform.move_ip(-x_speed, 0)
         for pearl in pearls:
-            pearl.x -= x_speed
+            pearl.move_ip(-x_speed, 0)
 
-    def move_jump(self, y_vel: float, pearls: list[pygame.Rect]) -> float:
-        """Lowers the map down to give illusiion of jumping."""
-        GRAVITY_ACCEL: float = -0.5
+    def move_down(self, pearls: list[pygame.Rect], dist: float = 5):
+        """To fix glitch where player gets stuck in platform and cant move."""
         for platform in self.platforms:
-            platform.y += y_vel
+            platform.move_ip(0, dist)
         for pearl in pearls:
-            pearl.y += y_vel
-        y_vel += GRAVITY_ACCEL
-        return y_vel
+            pearl.move_ip(0, dist)
 
+    def move_jump(self,  pearls: list[pygame.Rect]):
+        """Lowers the map down to give illusiion of jumping."""
+        for platform in self.platforms:
+            platform.move_ip(0, self.y_vel)
+        for pearl in pearls:
+            pearl.move_ip(0, self.y_vel)
 
     # TODO define load_room
     # Connects enterances in each room
