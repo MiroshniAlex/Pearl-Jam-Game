@@ -18,6 +18,10 @@ clock = pygame.time.Clock()
 
 # TODO Instantiate Player
 
+# Define screen height and width
+SCREEN_WIDTH: int = 500
+SCREEN_HEIGHT: int = 500
+
 # Set up the drawing window and size
 screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT])
 
