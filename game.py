@@ -83,7 +83,7 @@ running = True
 while running:
     
     # Background fill
-    screen.fill((0, 0, 0))
+    screen.fill((0, 255, 110))
     
     for event in pygame.event.get():
 
