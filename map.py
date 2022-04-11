@@ -54,10 +54,21 @@ class Map:
 
     def move_jump(self,  pearls: list[pygame.Rect]):
         """Lowers the map down to give illusiion of jumping."""
+        pixel_threshold: float = 0.3
         for platform in self.platforms:
-            platform.move_ip(0, self.y_vel)
+            if self.y_vel < 1 and self.y_vel > pixel_threshold:
+                platform.move_ip(0, 1)
+            elif self.y_vel > -1 and self.y_vel < -pixel_threshold:
+                platform.move_ip(0, -1)
+            else: 
+                platform.move_ip(0, self.y_vel)
         for pearl in pearls:
-            pearl.move_ip(0, self.y_vel)
+            if self.y_vel < 1 and self.y_vel > pixel_threshold:
+                pearl.move_ip(0, 1)
+            elif self.y_vel > -1 and self.y_vel < -pixel_threshold:
+                pearl.move_ip(0, -1)
+            else: 
+                pearl.move_ip(0, self.y_vel)
 
     # TODO define load_room
     # Connects enterances in each room

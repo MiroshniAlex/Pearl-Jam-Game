@@ -63,10 +63,11 @@ room1: Map = Map(600, 600, 0, platforms)
 
 # TODO Instantiate Player
 PLAYER_SPEED: float = 1
-GRAVITY_ACCEL: float = -.004
+GRAVITY_ACCEL: float = -.01
 PLAYER_HEIGHT: float = 20.0
 PLAYER_WIDTH: float = 20.0
-player: Player = Player(PLAYER_HEIGHT, PLAYER_WIDTH, 290, 500)
+PLAYER_JUMP: float = 3
+player: Player = Player(PLAYER_HEIGHT, PLAYER_WIDTH, 200, 400)
 
 # Defining platform collision check function
 def player_platform_collision(room: Map, player: Player) -> bool:
@@ -100,7 +101,7 @@ while running:
                     if platform.y == (player.rect.y + PLAYER_HEIGHT):
                         player_on_plat = True
                 if player_on_plat is True:
-                    room1.y_vel = 2
+                    room1.y_vel = PLAYER_JUMP
                     room1.move_down(pearls)
 
             elif event.key == pygame.K_d:
@@ -141,6 +142,7 @@ while running:
             room1.y_vel = 0
         elif collision and player.rect.y > platform.y:
             room1.move_down(pearls, -5)
+            room1.y_vel = 0
     
     for pearl in pearls:
         if player.rect.colliderect(pearl):
