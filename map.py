@@ -54,7 +54,7 @@ class Map:
 
     def move_jump(self,  pearls: list[pygame.Rect]):
         """Lowers the map down to give illusiion of jumping."""
-        pixel_threshold: float = 0.3
+        pixel_threshold: float = 0.4
         for platform in self.platforms:
             if self.y_vel < 1 and self.y_vel > pixel_threshold:
                 platform.move_ip(0, 1)

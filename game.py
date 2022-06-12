@@ -15,10 +15,10 @@ pygame.init()
 
 # Clock to control frame rate 
 clock = pygame.time.Clock()
-clock.tick(1)
+clock.tick(60)
 
 # Define screen height and width
-SCREEN_WIDTH: int = 600
+SCREEN_WIDTH: int = 1000
 SCREEN_HEIGHT: int = 600
 
 # Key presses bool
@@ -26,7 +26,7 @@ key_press_right: bool = False
 key_press_left: bool = False
 
 # Set up the drawing window and size
-screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT])
+screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT], pygame.FULLSCREEN)
 
 # Set up platforms and pearls
 platform1: pygame.Rect = pygame.Rect(-1000, 590, 6000, 10)
@@ -90,11 +90,13 @@ while running:
         # Check for QUIT event (user closes window). If QUIT, then set running to false.
         if event.type == QUIT:
             running = False
-            pygame.quit()
-            sys.exit()
 
         # TODO Check if user presses down on a key and if colliding with wall/platform
         if event.type == pygame.KEYDOWN:
+
+            if event.key == pygame.K_ESCAPE:
+                running = False 
+
             if event.key == pygame.K_w:
                 player_on_plat = False
                 for platform in room1.platforms:
@@ -153,3 +155,6 @@ while running:
     player.render(screen)
 
     pygame.display.flip()
+
+pygame.quit()
+sys.exit()
